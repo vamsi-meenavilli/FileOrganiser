@@ -1,0 +1,40 @@
+import os
+import shutil
+from os import path
+a=""
+x=[]
+y=""
+z=set(())
+def takeinput():
+    global a
+    a=input("enter path:")
+    filesinlist(a)
+    getfileextension()
+    numberofextensions()
+    changedirectory()
+    makedirectories()
+    movefiles()
+def filesinlist(a):
+    global x
+    for i,j,k in os.walk(a):
+        x.append(k)
+def getfileextension():
+    global x,y
+    y=[i.split(".")[-1] for i in x[0]]
+def numberofextensions():
+    global y,z
+    z=set(y)
+def changedirectory():
+    global a
+    os.chdir(a)
+def makedirectories():
+    global z
+    for i in z:
+        os.mkdir(i)
+def movefiles():
+    global x,y
+    for i in range(len(x[0])):
+        src=path.realpath(x[0][i])
+        dst=path.realpath(y[i])
+        shutil.move(src,dst)
+takeinput()
